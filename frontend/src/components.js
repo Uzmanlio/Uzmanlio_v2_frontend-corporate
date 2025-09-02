@@ -72,7 +72,7 @@ export const LoginPage = ({ onLogin }) => {
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-gray-900 mb-2">Hoş geldiniz!</h2>
             <p className="text-gray-600 text-sm">
-              Korvo hesabınız yok mu? 
+              Uzmanlio hesabınız yok mu? 
               <a href="#" className="text-primary-600 hover:text-primary-700 ml-1">
                 Hemen ücretsiz hesap oluşturun
               </a>
@@ -2031,6 +2031,7 @@ export const Dashboard = ({ onLogout }) => {
   const navigation = [
     { name: 'Anasayfa', href: '/dashboard', icon: '🏠' },
     { name: 'Profil Bilgileri', href: '/dashboard/profile', icon: '👤' },
+    { name: 'Yönetici Ayarları', href: '/dashboard/admin-settings', icon: '🛡️' },
     { name: 'Uzmanlık Bilgileri', href: '/dashboard/expertise', icon: '🎓' },
     { name: 'Hizmetlerim', href: '/dashboard/services', icon: '🛠️' },
     { name: 'Takvim', href: '/dashboard/calendar', icon: '📅' },
@@ -2175,6 +2176,7 @@ export const Dashboard = ({ onLogout }) => {
           <Routes>
             <Route path="/" element={<DashboardHome />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin-settings" element={<AdminSettings />} />
             <Route path="/expertise" element={<Expertise />} />
             <Route path="/services" element={<Services />} />
             <Route path="/calendar" element={<Calendar />} />
@@ -5269,26 +5271,41 @@ const Reports = () => {
 // Profile Component
 const Profile = () => {
   return (
-          <div className="relative">
-            <img
-              className="h-24 w-24 rounded-full object-cover"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt="Profil Fotoğrafı"
-            />
-            <button className="absolute bottom-0 right-0 bg-primary-600 text-white rounded-full p-2 hover:bg-primary-700 transition-colors">
-              📷
-            </button>
-          </div>
-          <div>
-            <h3 className="text-lg font-medium text-gray-900">Profil Fotoğrafı</h3>
-            <p className="text-gray-600">JPG, PNG veya GIF formatında, maksimum 5MB</p>
-            <button className="mt-2 text-primary-600 hover:text-primary-700 text-sm font-medium">
-              Fotoğraf Değiştir
-            </button>
-          </div>
+    <div className="space-y-8">
+      {/* Profil Fotoğrafı */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 flex items-center space-x-6">
+        <div className="relative">
+          <img
+            className="h-24 w-24 rounded-full object-cover"
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt="Profil Fotoğrafı"
+          />
+          <button className="absolute bottom-0 right-0 bg-primary-600 text-white rounded-full p-2 hover:bg-primary-700 transition-colors">
+            📷
+          </button>
+        </div>
+        <div>
+          <h3 className="text-lg font-medium text-gray-900">Profil Fotoğrafı</h3>
+          <p className="text-gray-600">JPG, PNG veya GIF formatında, maksimum 5MB</p>
+          <button className="mt-2 text-primary-600 hover:text-primary-700 text-sm font-medium">
+            Fotoğraf Değiştir
+          </button>
         </div>
       </div>
-      {/* ...rest of Profile component as previously structured, with all tags closed and no duplicate code... */}
+
+      {/* Profil Bilgileri */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <h3 className="text-lg font-medium text-gray-900 mb-4">Profil Bilgileri</h3>
+        {/* ...other profile info fields here... */}
+        {/* Yönetici Ayarları Section */}
+        <div className="mt-8">
+          <AdminSettings />
+        </div>
+      </div>
+
+      {/* Sertifikalar */}
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+        <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium text-gray-900">Sertifikalar</h3>
           <button 
             onClick={() => setCertModal(true)}
@@ -5331,7 +5348,7 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Experience */}
+      {/* Deneyim */}
       <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium text-gray-900">Deneyim</h3>
@@ -5365,7 +5382,6 @@ const Profile = () => {
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium text-gray-900">Dosyalar</h3>
         </div>
-        
         {/* Information Box */}
         <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-start space-x-3">
@@ -5377,7 +5393,6 @@ const Profile = () => {
             </p>
           </div>
         </div>
-
         {/* File Upload Area */}
         <div className="mb-6">
           <div
@@ -5418,7 +5433,6 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
         {/* Uploaded Files List */}
         {uploadedFiles.length > 0 && (
           <div>
